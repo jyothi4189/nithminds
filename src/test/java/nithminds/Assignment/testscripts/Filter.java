@@ -11,6 +11,7 @@ import org.openqa.selenium.SearchContext;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
@@ -36,30 +37,9 @@ public void Parfum(String filtertype,String option) throws InterruptedException 
 	
 	PerfumePage PerfumePage=new PerfumePage(driver);
 	PerfumePage.clickOnShowMoreButton();
-	if(filtertype.equalsIgnoreCase("Produktart")) {
-	PerfumePage.selectProduktart(option);
-	}
-	if(filtertype.equalsIgnoreCase("Marke")) {
-	PerfumePage.selectMarke(option);;
-	}
-	if(filtertype.equalsIgnoreCase("Für Wen")) {
-	PerfumePage.selectFürWen(option);;
-	}
-	if(filtertype.equalsIgnoreCase("Duftnote")) {
-	PerfumePage.selectDuftnote(option);;
-	}
-	if(filtertype.equalsIgnoreCase("Verantwortung")) {
-	PerfumePage.selectVerantwortung(option);;
-	}
-	if(filtertype.equalsIgnoreCase("Zusatzstoffe")) {
-	PerfumePage.selectZusatzstoffe(option);
-	}
-	if(filtertype.equalsIgnoreCase("Aktionen")) {
-	PerfumePage.selectAktionen(option);
-	}
-	if(filtertype.equalsIgnoreCase("Geschenk für")){
-	PerfumePage.selectGeschenkfür(option);
-	}
+	String filterApplied = PerfumePage.selectFilter(filtertype, option);
+	Assert.assertEquals(filterApplied, option);
+	
         Map<String, String> AllListingProductDetails = PerfumePage.getListingInfo();
      
 	for(Map.Entry<String, String> eachlisting:AllListingProductDetails.entrySet()) {
@@ -76,9 +56,9 @@ public void Parfum(String filtertype,String option) throws InterruptedException 
 
 @DataProvider(name="filterChoice")
 public Object[] selectFilterOptions() {
-	return new Object[][]{{"Produktart","Eau de Parfum"}
-		
+	return new Object[][]{{"Zusatzstoffe","parabenfrei"},
+	{"Marke","Acca Kappa"}
 		
 	};
-}//{"Marke","Abercrombie & Fitch"}
+}
 }

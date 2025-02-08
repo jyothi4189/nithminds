@@ -27,8 +27,8 @@ public PerfumePage(WebDriver driver) {
 WebElement productFilter;
 @FindBy(xpath="//div[@class='facet-option__label']/div")
 List<WebElement> dropdownoption;
-@FindBy(xpath="//div[@class='selected-facets']/button[@class='selected-facets__value']/font")
-List<WebElement> AppliedFilters;
+@FindBy(xpath="//button[@class='selected-facets__value']")
+WebElement AppliedFilter;
 @FindBy(xpath="//div[@data-testid='brand']")
 WebElement Brandfilter;
 @FindBy(xpath="//button[@class='button button__with-icon--transparent button__normal facet-list__show-more']")
@@ -239,9 +239,56 @@ public Map<String, String> getListingInfo() {
 		}while(true);
 	}
 	catch(Exception e) {
-	e.printStackTrace();	
+	//e.printStackTrace();	
 	}
 	return EachListingProductDetails;
+}
+public String selectFilter(String FilterCategory,String option) {
+	try {
+	if(FilterCategory.equalsIgnoreCase("Produktart")) {
+		productFilter.click();
+	}
+	else if(FilterCategory.equalsIgnoreCase("Marke")) {
+		Brandfilter.click();
+	}
+else if(FilterCategory.equalsIgnoreCase("Für Wen")) {
+	ForWhomFilter.click();
+	}
+else if(FilterCategory.equalsIgnoreCase("Duftnote")) {
+	FragranceFilter.click();
+}
+else if(FilterCategory.equalsIgnoreCase("Verantwortung")) {
+	ResponsibilityFilter.click();
+}
+else if(FilterCategory.equalsIgnoreCase("Zusatzstoffe")) {
+	AdditivesFilter.click();
+}
+else if(FilterCategory.equalsIgnoreCase("Aktionen")) {
+	ActionFilter.click();
+}
+else if(FilterCategory.equalsIgnoreCase("Geschenk für")) {
+	GiftForFilter.click();
+}
+else {
+	System.out.println("Selected filter option not available");
+}
+	
+	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
+	JavascriptExecutor js=(JavascriptExecutor)driver;
+	for(WebElement eachdropdownoption:dropdownoption) {
+	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachdropdownoption);
+	String productRequired = eachdropdownoption.getText();
+	if(productRequired.equalsIgnoreCase(option)) {
+		eachdropdownoption.click();
+		break;
+	}
+	}
+	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='selected-facets']/button[@class='selected-facets__value' and text()='"+option+"']")));
+	}
+	catch(Exception e) {
+		//e.printStackTrace();
+	}
+	return AppliedFilter.getText();
 }
 
 }
