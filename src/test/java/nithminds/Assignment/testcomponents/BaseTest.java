@@ -82,7 +82,7 @@ public class BaseTest {
 		FileUtils.copyFile(source, destination);
 		return System.getProperty("user.dir")+ "//reports//ScreenShots//" +testCaseName+ ".png";
 	}
-	@AfterMethod(enabled=false)
+	@AfterMethod()
 	public void tearDown() {
 		driver.quit();
 	}
