@@ -2,36 +2,40 @@
 <testng-results ignored="0" total="2" passed="2" failed="0" skipped="0">
   <reporter-output>
   </reporter-output>
-  <suite started-at="2025-02-08T23:52:18 IST" name="Default suite" finished-at="2025-02-08T23:54:18 IST" duration-ms="120331">
+  <suite started-at="2025-02-09T02:17:27 IST" name="Default suite" finished-at="2025-02-09T02:19:09 IST" duration-ms="102073">
     <groups>
     </groups>
-    <test started-at="2025-02-08T23:52:18 IST" name="Default test" finished-at="2025-02-08T23:54:18 IST" duration-ms="120331">
+    <test started-at="2025-02-09T02:17:27 IST" name="Default test" finished-at="2025-02-09T02:19:09 IST" duration-ms="102073">
       <class name="nithminds.Assignment.testscripts.Filter">
-        <test-method is-config="true" signature="LaunchBrowser()[pri:0, instance:nithminds.Assignment.testscripts.Filter@3febb011]" started-at="2025-02-08T23:52:18 IST" name="LaunchBrowser" finished-at="2025-02-08T23:52:27 IST" duration-ms="8669" status="PASS">
+        <test-method is-config="true" signature="LaunchBrowser()[pri:0, instance:nithminds.Assignment.testscripts.Filter@3febb011]" started-at="2025-02-09T02:17:27 IST" name="LaunchBrowser" finished-at="2025-02-09T02:17:34 IST" duration-ms="7389" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LaunchBrowser -->
-        <test-method signature="Parfum(java.lang.String,java.lang.String)[pri:0, instance:nithminds.Assignment.testscripts.Filter@3febb011]" started-at="2025-02-08T23:52:27 IST" name="Parfum" data-provider="filterChoice" finished-at="2025-02-08T23:53:36 IST" duration-ms="69460" status="PASS">
+        <test-method signature="Parfum(java.lang.String,java.lang.String)[pri:0, instance:nithminds.Assignment.testscripts.Filter@3febb011]" started-at="2025-02-09T02:17:34 IST" name="Parfum" data-provider="filterChoice" finished-at="2025-02-09T02:18:35 IST" duration-ms="60726" status="PASS">
           <params>
             <param index="0">
               <value>
-                <![CDATA[Zusatzstoffe]]>
+                <![CDATA[Aktionen]]>
               </value>
             </param>
             <param index="1">
               <value>
-                <![CDATA[parabenfrei]]>
+                <![CDATA[Geschenk]]>
               </value>
             </param>
           </params>
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Parfum -->
-        <test-method is-config="true" signature="LaunchBrowser()[pri:0, instance:nithminds.Assignment.testscripts.Filter@3febb011]" started-at="2025-02-08T23:53:36 IST" name="LaunchBrowser" finished-at="2025-02-08T23:53:43 IST" duration-ms="7043" status="PASS">
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:nithminds.Assignment.testscripts.Filter@3febb011]" started-at="2025-02-09T02:18:35 IST" name="tearDown" finished-at="2025-02-09T02:18:36 IST" duration-ms="827" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
+        <test-method is-config="true" signature="LaunchBrowser()[pri:0, instance:nithminds.Assignment.testscripts.Filter@3febb011]" started-at="2025-02-09T02:18:36 IST" name="LaunchBrowser" finished-at="2025-02-09T02:18:41 IST" duration-ms="4981" status="PASS">
           <reporter-output>
           </reporter-output>
         </test-method> <!-- LaunchBrowser -->
-        <test-method signature="Parfum(java.lang.String,java.lang.String)[pri:0, instance:nithminds.Assignment.testscripts.Filter@3febb011]" started-at="2025-02-08T23:53:43 IST" name="Parfum" data-provider="filterChoice" finished-at="2025-02-08T23:54:18 IST" duration-ms="35033" status="PASS">
+        <test-method signature="Parfum(java.lang.String,java.lang.String)[pri:0, instance:nithminds.Assignment.testscripts.Filter@3febb011]" started-at="2025-02-09T02:18:41 IST" name="Parfum" data-provider="filterChoice" finished-at="2025-02-09T02:19:08 IST" duration-ms="27517" status="PASS">
           <params>
             <param index="0">
               <value>
@@ -47,6 +51,10 @@
           <reporter-output>
           </reporter-output>
         </test-method> <!-- Parfum -->
+        <test-method is-config="true" signature="tearDown()[pri:0, instance:nithminds.Assignment.testscripts.Filter@3febb011]" started-at="2025-02-09T02:19:08 IST" name="tearDown" finished-at="2025-02-09T02:19:09 IST" duration-ms="543" status="PASS">
+          <reporter-output>
+          </reporter-output>
+        </test-method> <!-- tearDown -->
       </class> <!-- nithminds.Assignment.testscripts.Filter -->
     </test> <!-- Default test -->
   </suite> <!-- Default suite -->

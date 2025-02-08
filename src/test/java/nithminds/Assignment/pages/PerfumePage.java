@@ -199,33 +199,26 @@ public void selectGeschenkfür(String GiftFor) {
 	
 	
 }
-public Map<String, String> getListingInfo() {
+public List<String> getListingInfo() {
 	JavascriptExecutor js=(JavascriptExecutor)driver;
 	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(100));
-	//List<Map<String,String>> AllListingProductDetails=new ArrayList<Map<String,String>>();
-	Map<String,String> EachListingProductDetails=new HashMap<String,String>();
+	
+	List<String> ProductInfo=new ArrayList<String>();
 	
 	try {
 		do {
 	for(WebElement eachListing:Listings) {
 		
 		wait.until(ExpectedConditions.visibilityOf(eachListing));
-		Thread.sleep(20);
+		Thread.sleep(10);
 		js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachListing);
 		
-		 String Brand = eachListing.findElement(By.xpath("div[@class='product-info__info-wrapper']/div[@class='text top-brand']")).getText();
-		 
-		// String Product = eachListing.findElement(By.xpath("div[@class='product-info__info-wrapper']/div[@class='product-info__details']/div[@class='text category']")).getText();
+		wait.until(ExpectedConditions.visibilityOf(eachListing));
 		
-		 String Price=eachListing.findElement(By.xpath("//div[@data-testid='product-info-price']/descendant::div[contains(@class,'price-row__price price-row__price--discount')]")).getText();
+		ProductInfo.add(eachListing.getText());
 		
-		// EachListingProductDetails.add(Product);
-		 
-		 System.out.println("Brand:"+Brand);
-		// System.out.println("Product:"+Product);
-		 System.out.println("Price:"+Price);
-		 EachListingProductDetails.put(Brand, Price);
-		//System.out.println(EachListingProductDetails);
+		 System.out.println(eachListing.getText());
+		
 	}
 	 
 	Thread.sleep(500);
@@ -241,7 +234,9 @@ public Map<String, String> getListingInfo() {
 	catch(Exception e) {
 	//e.printStackTrace();	
 	}
-	return EachListingProductDetails;
+	
+	
+	return ProductInfo;
 }
 public String selectFilter(String FilterCategory,String option) {
 	try {

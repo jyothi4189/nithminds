@@ -40,15 +40,17 @@ public void Parfum(String filtertype,String option) throws InterruptedException 
 	String filterApplied = PerfumePage.selectFilter(filtertype, option);
 	Assert.assertEquals(filterApplied, option);
 	
-        Map<String, String> AllListingProductDetails = PerfumePage.getListingInfo();
-     
-	for(Map.Entry<String, String> eachlisting:AllListingProductDetails.entrySet()) {
-		String brand = eachlisting.getKey();
-		String price = eachlisting.getValue();
-		test.log(Status.INFO, "brand: "+brand+"<br>price: "+price);
-	}
+        List<String> AllListingProductDetails = PerfumePage.getListingInfo();
      
 	
+		
+		
+		for(int i=0;i<AllListingProductDetails.size();i++) {
+		test.log(Status.INFO, "Info:"+AllListingProductDetails.get(i));
+		}
+	
+     
+
 }
 
 
@@ -56,7 +58,7 @@ public void Parfum(String filtertype,String option) throws InterruptedException 
 
 @DataProvider(name="filterChoice")
 public Object[] selectFilterOptions() {
-	return new Object[][]{{"Zusatzstoffe","parabenfrei"},
+	return new Object[][]{{"Aktionen","Geschenk"},
 	{"Marke","Acca Kappa"}
 		
 	};
