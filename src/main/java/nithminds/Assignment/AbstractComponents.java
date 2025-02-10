@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -17,8 +18,24 @@ import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.WorkbookFactory;
+import org.openqa.selenium.JavascriptExecutor;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class AbstractComponents {
+	public WebDriver driver;
+	public WebDriverWait wait;
+	public JavascriptExecutor js;
+	public AbstractComponents(WebDriver driver){
+		this.driver=driver;
+		this.wait = new WebDriverWait(driver, Duration.ofSeconds(50));
+        this.js = (JavascriptExecutor) driver;
+		PageFactory.initElements(driver, this);
+		
+	}
 	public  FileInputStream readPropertyFile() throws FileNotFoundException {
 		FileInputStream fis=new FileInputStream(System.getProperty("user.dir")+"\\src\\test\\java\\nithminds\\Assignment\\resources\\global.properties");
 				
@@ -239,4 +256,33 @@ public class AbstractComponents {
 				
 			}
 			}
+			public void clickElement(WebElement element) {
+		        try {
+		        	
+					wait.until(ExpectedConditions.elementToBeClickable(element)).click();
+		        } catch (Exception e) {
+		            throw new RuntimeException("Failed to click element: " + element, e);
+		        }
+		    }
+			public void waitForElement(WebElement element) {
+		        try {
+		            wait.until(ExpectedConditions.visibilityOf(element));
+		        } catch (Exception e) {
+		            throw new RuntimeException("Element not visible: " + element, e);
+		        }
+		    }
+			public void waitForSubUrl(String subUrl) {
+				try {
+					wait.until(ExpectedConditions.urlContains(subUrl));
+		        } catch (Exception e) {
+		            throw new RuntimeException("Url doesnot contains: " + subUrl, e);
+		        }	
+			}
+			 public void scrollToElement(WebElement element) {
+			        try {
+			            js.executeScript("arguments[0].scrollIntoView({block: 'center'});", element);
+			        } catch (Exception e) {
+			            throw new RuntimeException("Failed to scroll to element: " + element, e);
+			        }
+			    }
 }

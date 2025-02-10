@@ -5,7 +5,7 @@
     <classes>
       <class name="nithminds.Assignment.testscripts.Filter">
         <methods>
-          <include name="Parfum" invocation-numbers="0"/>
+          <include name="Parfum"/>
           <include name="LaunchBrowser"/>
           <include name="tearDown"/>
         </methods>

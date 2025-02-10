@@ -26,29 +26,34 @@ import nithminds.Assignment.testcomponents.ListenersImplementation;
 @Listeners(ListenersImplementation.class)
 public class Filter extends BaseTest{
 @Test(dataProvider="filterChoice")
-public void Parfum(String filtertype,String option) throws InterruptedException {
+public void Parfum(String filterType,String option) throws InterruptedException {
 	ExtentTest test=ListenersImplementation.getTest();
 	LandingPage landingPage=new LandingPage(driver);
+	try {
 	String Category="PARFUM";
 	landingPage.handleCookieConsent();
 	test.log(Status.PASS, "Cookie consent handled succesfully");
 	landingPage.selectCategory(Category);
 	test.log(Status.PASS, "Clicked on "+Category+" succesfully");
 	
-	PerfumePage PerfumePage=new PerfumePage(driver);
-	PerfumePage.clickOnShowMoreButton();
-	String filterApplied = PerfumePage.selectFilter(filtertype, option);
+	PerfumePage perfumePage=new PerfumePage(driver);
+	perfumePage.clickOnShowMoreButton();
+	String filterApplied = perfumePage.selectFilter(filterType, option);
 	Assert.assertEquals(filterApplied, option);
-	
-        List<String> AllListingProductDetails = PerfumePage.getListingInfo();
+	 test.log(Status.PASS, "Filter '" + filterType + "' applied successfully: " + filterApplied);
+        List<String> allListingProductDetails = perfumePage.getListingInfo();
      
 	
 		
 		
-		for(int i=0;i<AllListingProductDetails.size();i++) {
-		test.log(Status.INFO, "Info:"+AllListingProductDetails.get(i));
+		for(int i=0;i<allListingProductDetails.size();i++) {
+		test.log(Status.INFO, "Info:"+allListingProductDetails.get(i));
 		}
-	
+	}
+	catch(Exception e) {
+		 test.log(Status.FAIL, "Test failed due to exception: " + e.getMessage());
+         Assert.fail("Test execution failed", e);
+	}
      
 
 }

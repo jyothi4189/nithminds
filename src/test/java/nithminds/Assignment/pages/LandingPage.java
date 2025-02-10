@@ -19,46 +19,46 @@ public class LandingPage extends AbstractComponents{
 WebDriver driver;
 
 public LandingPage(WebDriver driver){
+	super(driver);
 	this.driver=driver;
 	PageFactory.initElements(driver, this);
 }
 @FindBy(id="usercentrics-root")
 WebElement shadowHost;
 @FindBy(xpath="//li[@class='navigation-main-entry']/a")
-List<WebElement> AllCategory;
+List<WebElement> allCategory;
 
 public void goTo() throws IOException {
 	String url = getUrl("url");
 	driver.get(url);
 }
 public void handleCookieConsent() throws InterruptedException {
-
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(30));
 	
 	
 	 SearchContext shadowrootElement = shadowHost.getShadowRoot();
 	
-		WebElement acceptbutton = shadowrootElement.findElement(By.cssSelector("button[class='sc-dcJsrY eIFzaz']"));
+		WebElement acceptButton = shadowrootElement.findElement(By.cssSelector("button[class='sc-dcJsrY eIFzaz']"));
 	
-	wait.until(ExpectedConditions.elementToBeClickable(acceptbutton));
-		acceptbutton.click();
+	wait.until(ExpectedConditions.elementToBeClickable(acceptButton));
+	clickElement(acceptButton);
+		
 }
-public void selectCategory(String Option) throws InterruptedException {
+public void selectCategory(String option) throws InterruptedException {
 
-	System.out.println(driver.getWindowHandles().size());
 	
 	String tragetUrl=null;
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(30));
 	
-	for(WebElement eachCategory:AllCategory) {
+	
+	for(WebElement eachCategory:allCategory) {
 		String text = eachCategory.getText();
 		
-		if(text.equalsIgnoreCase(Option)) {
+		if(text.equalsIgnoreCase(option)) {
 			tragetUrl=eachCategory.getAttribute("href");
-			eachCategory.click();
+			clickElement(eachCategory);
+			
 			break;
 		}
 	}
-	wait.until(ExpectedConditions.urlContains(tragetUrl));
+	waitForSubUrl(tragetUrl);
 }
 }

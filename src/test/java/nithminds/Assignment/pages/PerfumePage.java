@@ -20,270 +20,112 @@ import nithminds.Assignment.AbstractComponents;
 public class PerfumePage extends AbstractComponents{
 	WebDriver driver;
 public PerfumePage(WebDriver driver) {
+	super(driver);
 	this.driver=driver;
 	PageFactory.initElements(driver, this);
 }
 @FindBy(xpath="//div[@class='facet__title' and @data-testid='classificationClassName']")
 WebElement productFilter;
 @FindBy(xpath="//div[@class='facet-option__label']/div")
-List<WebElement> dropdownoption;
+List<WebElement> dropDownOption;
 @FindBy(xpath="//button[@class='selected-facets__value']")
-WebElement AppliedFilter;
+WebElement appliedFilter;
 @FindBy(xpath="//div[@data-testid='brand']")
-WebElement Brandfilter;
+WebElement brandfilter;
 @FindBy(xpath="//button[@class='button button__with-icon--transparent button__normal facet-list__show-more']")
-WebElement showmoreButton;
+WebElement showMoreButton;
 @FindBy(xpath="//button[text()='Weniger Filter anzeigen']")
-WebElement showlessButton;
+WebElement showLessButton;
 @FindBy(xpath="//div[@data-testid='gender']")
-WebElement ForWhomFilter;
+WebElement forWhomFilter;
 @FindBy(xpath="//div[@data-testid='Duftnote neu']")
-WebElement FragranceFilter;
+WebElement fragranceFilter;
 @FindBy(xpath="//div[@data-testid='responsibility']")
-WebElement ResponsibilityFilter;
+WebElement responsibilityFilter;
 @FindBy(xpath="//div[@data-testid='additives']")
-WebElement AdditivesFilter;
+WebElement additivesFilter;
 @FindBy(xpath="//div[@data-testid='flags']")
-WebElement ActionFilter;
+WebElement actionFilter;
 @FindBy(xpath="//div[@data-testid='Geschenk für']")
-WebElement GiftForFilter;
+WebElement giftForFilter;
 @FindBy(xpath="//div[@class='product-info']")
-List<WebElement> Listings;
+List<WebElement> listings;
 @FindBy(xpath="//a[@data-testid='pagination-arrow-right']")
-WebElement NextPageArrow;
+WebElement nextPageArrow;
 
 public void clickOnShowMoreButton() {
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(100));
-	wait.until(ExpectedConditions.visibilityOf(showmoreButton));
-	JavascriptExecutor js=(JavascriptExecutor)driver;	
-	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", showmoreButton);
-	wait.until(ExpectedConditions.visibilityOf(showmoreButton));
-	showmoreButton.click();
-	wait.until(ExpectedConditions.visibilityOf(showlessButton));
-}
-public void selectProduktart(String Product) {
-	productFilter.click();
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(100));
-	JavascriptExecutor js=(JavascriptExecutor)driver;
-	for(WebElement eachdropdownoption:dropdownoption) {
-		//js.executeScript("arguments[0].scrollIntoView({block: 'center'});", TotalListingPages);
-		wait.until(ExpectedConditions.visibilityOf(eachdropdownoption));
-	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachdropdownoption);
-	String productRequired = eachdropdownoption.getText();
-	if(productRequired.equalsIgnoreCase(Product)) {
-		eachdropdownoption.click();
-		break;
-	}
-	}
-	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='selected-facets']/button[@class='selected-facets__value' and text()='"+Product+"']")));
 	
 	
+	waitForElement(showMoreButton);
+	
+	scrollToElement(showMoreButton);
+
+	clickElement(showMoreButton);
+	 waitForElement(showLessButton);
 	
 }
-public void selectMarke(String Brand) {
-	Brandfilter.click();
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-	JavascriptExecutor js=(JavascriptExecutor)driver;
-	for(WebElement eachdropdownoption:dropdownoption) {
-	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachdropdownoption);
-	String productRequired = eachdropdownoption.getText();
-	if(productRequired.equalsIgnoreCase(Brand)) {
-		eachdropdownoption.click();
-		break;
-	}
-	}
-	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='selected-facets']/button[@class='selected-facets__value' and text()='"+Brand+"']")));
-	
-	
-	
-}
-public void selectFürWen(String ForWhom) {
-	ForWhomFilter.click();
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-	JavascriptExecutor js=(JavascriptExecutor)driver;
-	for(WebElement eachdropdownoption:dropdownoption) {
-	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachdropdownoption);
-	String productRequired = eachdropdownoption.getText();
-	if(productRequired.equalsIgnoreCase(ForWhom)) {
-		eachdropdownoption.click();
-		break;
-	}
-	}
-	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='selected-facets']/button[@class='selected-facets__value' and text()='"+ForWhom+"']")));
-	
-	
-	
-}
-public void selectDuftnote(String Fragrance) {
-	FragranceFilter.click();
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-	JavascriptExecutor js=(JavascriptExecutor)driver;
-	for(WebElement eachdropdownoption:dropdownoption) {
-	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachdropdownoption);
-	String productRequired = eachdropdownoption.getText();
-	if(productRequired.equalsIgnoreCase(Fragrance)) {
-		eachdropdownoption.click();
-		break;
-	}
-	}
-	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='selected-facets']/button[@class='selected-facets__value' and text()='"+Fragrance+"']")));
-	
-	
-	
-}
-public void selectVerantwortung(String Responsibility) {
-	ResponsibilityFilter.click();
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-	JavascriptExecutor js=(JavascriptExecutor)driver;
-	for(WebElement eachdropdownoption:dropdownoption) {
-	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachdropdownoption);
-	String productRequired = eachdropdownoption.getText();
-	if(productRequired.equalsIgnoreCase(Responsibility)) {
-		eachdropdownoption.click();
-		break;
-	}
-	}
-	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='selected-facets']/button[@class='selected-facets__value' and text()='"+Responsibility+"']")));
-	
-	
-	
-}
-public void selectZusatzstoffe(String Additives) {
-	AdditivesFilter.click();
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-	JavascriptExecutor js=(JavascriptExecutor)driver;
-	for(WebElement eachdropdownoption:dropdownoption) {
-	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachdropdownoption);
-	String productRequired = eachdropdownoption.getText();
-	if(productRequired.equalsIgnoreCase(Additives)) {
-		eachdropdownoption.click();
-		break;
-	}
-	}
-	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='selected-facets']/button[@class='selected-facets__value' and text()='"+Additives+"']")));
-	
-	
-	
-}
-public void selectAktionen(String Action) {
-	ActionFilter.click();
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-	JavascriptExecutor js=(JavascriptExecutor)driver;
-	for(WebElement eachdropdownoption:dropdownoption) {
-	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachdropdownoption);
-	String productRequired = eachdropdownoption.getText();
-	if(productRequired.equalsIgnoreCase(Action)) {
-		eachdropdownoption.click();
-		break;
-	}
-	}
-	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='selected-facets']/button[@class='selected-facets__value' and text()='"+Action+"']")));
-	
-	
-	
-}
-public void selectGeschenkfür(String GiftFor) {
-	GiftForFilter.click();
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-	JavascriptExecutor js=(JavascriptExecutor)driver;
-	for(WebElement eachdropdownoption:dropdownoption) {
-	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachdropdownoption);
-	String productRequired = eachdropdownoption.getText();
-	if(productRequired.equalsIgnoreCase(GiftFor)) {
-		eachdropdownoption.click();
-		break;
-	}
-	}
-	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='selected-facets']/button[@class='selected-facets__value' and text()='"+GiftFor+"']")));
-	
-	
-	
-}
+
 public List<String> getListingInfo() {
-	JavascriptExecutor js=(JavascriptExecutor)driver;
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(100));
 	
 	List<String> ProductInfo=new ArrayList<String>();
 	
 	try {
 		do {
-	for(WebElement eachListing:Listings) {
+	for(WebElement eachListing:listings) {
+		waitForElement(eachListing);
 		
-		wait.until(ExpectedConditions.visibilityOf(eachListing));
 		Thread.sleep(10);
-		js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachListing);
-		
-		wait.until(ExpectedConditions.visibilityOf(eachListing));
-		
+		scrollToElement(eachListing);
+		waitForElement(eachListing);
 		ProductInfo.add(eachListing.getText());
 		
 		 System.out.println(eachListing.getText());
 		
 	}
-	 
-	Thread.sleep(500);
-	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", NextPageArrow);
-	Thread.sleep(500);
-	String requiredurl=NextPageArrow.getAttribute("href");
-	NextPageArrow.click();
+	waitForElement(nextPageArrow);
 	
+	scrollToElement(nextPageArrow);
+	
+	
+	String requiredurl=nextPageArrow.getAttribute("href");
+	clickElement(nextPageArrow);
+	
+	
+	
+	waitForSubUrl(requiredurl);
 	Thread.sleep(2000);
-	wait.until(ExpectedConditions.urlContains(requiredurl));
-		}while(true);
+	
+		} while (nextPageArrow.isDisplayed());
 	}
 	catch(Exception e) {
-	//e.printStackTrace();	
+		
+		 throw new RuntimeException("Error fetching listing info", e);
 	}
 	
-	
+	finally {
 	return ProductInfo;
+	}
 }
-public String selectFilter(String FilterCategory,String option) {
+public String selectFilter(String filterCategory,String option) {
 	try {
-	if(FilterCategory.equalsIgnoreCase("Produktart")) {
-		productFilter.click();
-	}
-	else if(FilterCategory.equalsIgnoreCase("Marke")) {
-		Brandfilter.click();
-	}
-else if(FilterCategory.equalsIgnoreCase("Für Wen")) {
-	ForWhomFilter.click();
-	}
-else if(FilterCategory.equalsIgnoreCase("Duftnote")) {
-	FragranceFilter.click();
-}
-else if(FilterCategory.equalsIgnoreCase("Verantwortung")) {
-	ResponsibilityFilter.click();
-}
-else if(FilterCategory.equalsIgnoreCase("Zusatzstoffe")) {
-	AdditivesFilter.click();
-}
-else if(FilterCategory.equalsIgnoreCase("Aktionen")) {
-	ActionFilter.click();
-}
-else if(FilterCategory.equalsIgnoreCase("Geschenk für")) {
-	GiftForFilter.click();
-}
-else {
-	System.out.println("Selected filter option not available");
-}
+		WebElement filterElement = driver.findElement(By.xpath("//div[@class='facet__title' and text()='"+filterCategory+"']"));
+	clickElement(filterElement);
 	
-	WebDriverWait wait=new WebDriverWait(driver,Duration.ofSeconds(10));
-	JavascriptExecutor js=(JavascriptExecutor)driver;
-	for(WebElement eachdropdownoption:dropdownoption) {
-	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachdropdownoption);
-	String productRequired = eachdropdownoption.getText();
+	for(WebElement eachDropDownOption:dropDownOption) {
+	js.executeScript("arguments[0].scrollIntoView({block: 'center'});", eachDropDownOption);
+	String productRequired = eachDropDownOption.getText();
 	if(productRequired.equalsIgnoreCase(option)) {
-		eachdropdownoption.click();
+		clickElement(eachDropDownOption);
 		break;
 	}
 	}
-	wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='selected-facets']/button[@class='selected-facets__value' and text()='"+option+"']")));
+	waitForElement(driver.findElement(By.xpath("//div[@class='selected-facets']/button[@class='selected-facets__value' and text()='"+option+"']")));
+	 return appliedFilter.getText();
 	}
 	catch(Exception e) {
-		//e.printStackTrace();
+		throw new RuntimeException("Failed to select filter: " + filterCategory + " - " + option, e);
 	}
-	return AppliedFilter.getText();
+	
 }
 
 }
